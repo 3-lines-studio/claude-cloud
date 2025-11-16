@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# Symlink /root/.claude to /workspace/.claude for persistence
+if [ ! -L "/root/.claude" ]; then
+    # If /workspace/.claude doesn't exist, move /root/.claude there
+    if [ ! -d "/workspace/.claude" ]; then
+        if [ -d "/root/.claude" ]; then
+            mv /root/.claude /workspace/.claude
+        else
+            mkdir -p /workspace/.claude
+        fi
+    else
+        # /workspace/.claude exists, remove /root/.claude if it's not a symlink
+        rm -rf /root/.claude
+    fi
+    # Create symlink
+    ln -s /workspace/.claude /root/.claude
+    echo "Symlinked /root/.claude -> /workspace/.claude"
+fi
+
 # Configure git identity if provided
 if [ -n "$GIT_USER_NAME" ] && [ -n "$GIT_USER_EMAIL" ]; then
     echo "Configuring git identity..."
