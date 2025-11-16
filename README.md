@@ -18,7 +18,7 @@ Run Claude Code CLI in your browser from any device. Deployed on Railway with au
    | Variable | Value | Required |
    |----------|-------|----------|
    | `TTYD_PASSWORD` | Your password | ✅ |
-   | `ANTHROPIC_API_KEY` | `sk-ant-...` | ✅ |
+   | `ANTHROPIC_AUTH_TOKEN` | `sk-ant-...` | ✅ |
    | `GIT_USER_NAME` | Your Name | ✅ |
    | `GIT_USER_EMAIL` | your@email.com | ✅ |
    | `GITHUB_TOKEN` | `ghp_...` | Optional |
@@ -53,7 +53,7 @@ git push
 ```bash
 docker run -d -p 7681:7681 \
   -e TTYD_PASSWORD="password" \
-  -e ANTHROPIC_API_KEY="sk-ant-..." \
+  -e ANTHROPIC_AUTH_TOKEN="sk-ant-..." \
   -e GIT_USER_NAME="Your Name" \
   -e GIT_USER_EMAIL="your@email.com" \
   -e GITHUB_TOKEN="ghp_..." \
@@ -72,7 +72,7 @@ Get token from https://github.com/settings/tokens with `repo` scope for cloning 
 ### Environment Variables
 
 - **TTYD_PASSWORD**: Web terminal password (required)
-- **ANTHROPIC_API_KEY**: Claude API key (required)
+- **ANTHROPIC_AUTH_TOKEN**: Claude API key (required)
 - **GIT_USER_NAME/EMAIL**: Git commit identity (required)
 - **GITHUB_TOKEN**: Auto-authenticate git operations (optional)
 - **TTYD_USERNAME**: Web terminal username (default: `admin`)
@@ -98,7 +98,7 @@ GitHub Actions builds and publishes multi-arch images (`amd64`, `arm64`) to ghcr
 
 **Container won't start**
 - Check Railway logs for errors
-- Verify `ANTHROPIC_API_KEY` and `TTYD_PASSWORD` are set
+- Verify `ANTHROPIC_AUTH_TOKEN` and `TTYD_PASSWORD` are set
 
 **Can't connect**
 ```bash

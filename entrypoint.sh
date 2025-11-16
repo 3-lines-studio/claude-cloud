@@ -16,7 +16,9 @@ if [ -n "$GITHUB_TOKEN" ]; then
     git config --global credential.helper store
 
     # Store the token for github.com
-    echo "https://${GITHUB_TOKEN}@github.com" > /root/.git-credentials
+    # Use GIT_USER_NAME if available, otherwise fallback to 'git'
+    GIT_USERNAME="${GIT_USER_NAME:-git}"
+    echo "https://${GIT_USERNAME}:${GITHUB_TOKEN}@github.com" > /root/.git-credentials
     chmod 600 /root/.git-credentials
 
     echo "Git credentials configured! You can now clone repos with: git clone https://github.com/username/repo.git"
